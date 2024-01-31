@@ -49,7 +49,7 @@ export const Footer: FC = () => {
                 <div className="grid-flow-col gap-4 text-center pr-2">
                     <div>
                         <p className="text-white text-base font-light cursor-default ">
-                            Powered by
+                            Regig by Jaytechent
                         </p>
                         <a
                             rel="noreferrer"
