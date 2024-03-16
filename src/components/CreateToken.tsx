@@ -29,7 +29,7 @@ export const CreateToken: FC = () => {
             PROGRAM_ID,
           )[0],
           mint: mintKeypair.publicKey,
-          mintAuthority: publicKey,
+          mintAuthority: none,
           payer: publicKey,
           updateAuthority: publicKey,
         },
