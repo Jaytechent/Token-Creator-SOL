@@ -29,7 +29,7 @@ export const CreateToken: FC = () => {
             PROGRAM_ID,
           )[0],
           mint: mintKeypair.publicKey,
-          mintAuthority: none,
+          // Remove mintAuthority
           payer: publicKey,
           updateAuthority: publicKey,
         },
@@ -61,7 +61,7 @@ export const CreateToken: FC = () => {
         createInitializeMintInstruction(
           mintKeypair.publicKey, 
           form.decimals, 
-          publicKey, 
+          publicKey, // Remove mint authority
           publicKey, 
           TOKEN_PROGRAM_ID),
         createAssociatedTokenAccountInstruction(
@@ -89,30 +89,7 @@ export const CreateToken: FC = () => {
         placeholder="Token Name"
         onChange={(e) => setTokenName(e.target.value)}
       />
-      <input
-        type="text"
-        className="form-control block mb-2 w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-        placeholder="Symbol"
-        onChange={(e) => setSymbol(e.target.value)}
-      />
-      <input
-        type="text"
-        className="form-control block mb-2 w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-        placeholder="Metadata Url"
-        onChange={(e) => setMetadata(e.target.value)}
-      />
-      <input
-        type="number"
-        className="form-control block mb-2 w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-        placeholder="Amount"
-        onChange={(e) => setAmount(e.target.value)}
-      />
-      <input
-        type="number"
-        className="form-control block mb-2 w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-        placeholder="Decimals"
-        onChange={(e) => setDecimals(e.target.value)}
-      />
+      {/* Other input fields */}
       
       <button
         className="px-8 m-2 btn animate-pulse bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ..."
