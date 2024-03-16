@@ -18,37 +18,38 @@ export const CreateToken: FC = () => {
       const mintKeypair = Keypair.generate();
       const tokenATA = await getAssociatedTokenAddress(mintKeypair.publicKey, publicKey);
 
-      const createMetadataInstruction = createCreateMetadataAccountV3Instruction(
-        {
-          metadata: PublicKey.findProgramAddressSync(
-            [
-              Buffer.from("metadata"),
-              PROGRAM_ID.toBuffer(),
-              mintKeypair.publicKey.toBuffer(),
-            ],
-            PROGRAM_ID,
-          )[0],
-          mint: mintKeypair.publicKey,
-          // Remove mintAuthority
-          payer: publicKey,
-          updateAuthority: publicKey,
-        },
-        {
-          createMetadataAccountArgsV3: {
-            data: {
-              name: form.tokenName,
-              symbol: form.symbol,
-              uri: form.metadata,
-              creators: null,
-              sellerFeeBasisPoints: 0,
-              uses: null,
-              collection: null,
-            },
-            isMutable: false,
-            collectionDetails: null,
-          },
-        },
-      );
+     const createMetadataInstruction = createCreateMetadataAccountV3Instruction(
+  {
+    metadata: PublicKey.findProgramAddressSync(
+      [
+        Buffer.from("metadata"),
+        PROGRAM_ID.toBuffer(),
+        mintKeypair.publicKey.toBuffer(),
+      ],
+      PROGRAM_ID,
+    )[0],
+    mint: mintKeypair.publicKey,
+    mintAuthority: null, // Set mintAuthority to null
+    payer: publicKey,
+    updateAuthority: publicKey,
+  },
+  {
+    createMetadataAccountArgsV3: {
+      data: {
+        name: form.tokenName,
+        symbol: form.symbol,
+        uri: form.metadata,
+        creators: null,
+        sellerFeeBasisPoints: 0,
+        uses: null,
+        collection: null,
+      },
+      isMutable: false,
+      collectionDetails: null,
+    },
+  },
+);
+
 
       const createNewTokenTransaction = new Transaction().add(
         SystemProgram.createAccount({
